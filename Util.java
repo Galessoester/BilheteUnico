@@ -2,6 +2,7 @@ package BilheteUnico;
 
 import static javax.swing.JOptionPane.*;
 import static java.lang.Integer.parseInt;
+import static java.lang.Double.parseDouble;
 
 public class Util {
 
@@ -76,6 +77,7 @@ public class Util {
 	}
 
 	public void menuPrincipal() {
+
 		String aux = "Escolha uma opção\n1. Administrador\n" + "2. Usuário\n3. Finalizar";
 		int opcao;
 
@@ -125,11 +127,68 @@ public class Util {
 			opcao = parseInt(showInputDialog(aux));
 			if (opcao < 1 || opcao > 4) {
 				showMessageDialog(null, "Opção inválida");
-			} else {
+			} else if (opcao == 1) {
+
+				consultarSaldo();
+
+			} else if (opcao == 2) {
+				carregarBilhete();
+
+			} else if (opcao == 3) {
+				passarNaCatraca();
 
 			}
 
 		} while (opcao != 4);
+
+	}
+
+//método para consultar o saldo do bilhete
+
+	public void consultarSaldo() {
+
+		String cpf;
+		int indice;
+
+		cpf = showInputDialog(null, "CPF: ");
+		indice = pesquisar(cpf);
+
+		if (indice != -1) {
+			showMessageDialog(null, "Saldo R$: " + bilhete[indice].saldo);
+		} else {
+			showMessageDialog(null, "CPF não encontrado");
+		}
+	}
+
+	// método para carregar o bilhete com um valor informado pelo usuário
+
+	public void carregarBilhete() {
+
+		String cpf;
+		int indice;
+		double valor;
+
+		cpf = showInputDialog(null, "CPF: ");
+		indice = pesquisar(cpf);
+
+		if (indice != -1) {
+			valor = parseDouble(showInputDialog("Valor da recarga: "));
+			bilhete[indice].carregarBilhete(valor);
+		}
+	}
+
+	// método para passar na catraca
+	public void passarNaCatraca() {
+
+		String cpf;
+		int indice;
+
+		cpf = showInputDialog(null, "CPF: ");
+		indice = pesquisar(cpf);
+
+		if (indice != -1) {
+			bilhete[indice].passarNaCatraca();
+		}
 
 	}
 

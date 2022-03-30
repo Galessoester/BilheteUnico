@@ -25,7 +25,7 @@ public class Bilhete {
 	}
 
 	// Método para carregar o bilhete com um valor recebido via parametro
-	public void carregar(double valor) {
+	public void carregarBilhete(double valor) {
 		saldo += valor;
 	}
 
@@ -37,5 +37,7 @@ public class Bilhete {
 		}
 		saldo -= valor;
 	}
+
+	
 
 }
